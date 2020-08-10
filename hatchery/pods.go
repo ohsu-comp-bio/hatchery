@@ -233,6 +233,14 @@ func buildPod(hatchConfig *FullHatcheryConfig, hatchApp *Container, userName str
 			Name:         "shared-data",
 			VolumeSource: k8sv1.VolumeSource{},
 		},
+		{
+			Name:         "dshm",
+			VolumeSource: k8sv1.VolumeSource{
+				EmptyDir: &k8sv1.EmptyDirVolumeSource{
+					Medium: "memory",
+				},
+			},
+		},
 	}
 
 	if mountUserVolume {
@@ -289,6 +297,10 @@ func buildPod(hatchConfig *FullHatcheryConfig, hatchApp *Container, userName str
 							MountPath:        "/data",
 							Name:             "shared-data",
 							MountPropagation: &bidirectional,
+						},
+						{
+							MountPath:        "/dev/shm",
+							Name:             "dshm",
 						},
 					},
 					Resources: k8sv1.ResourceRequirements{
