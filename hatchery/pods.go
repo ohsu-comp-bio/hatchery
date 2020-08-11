@@ -237,7 +237,7 @@ func buildPod(hatchConfig *FullHatcheryConfig, hatchApp *Container, userName str
 			Name:         "dshm",
 			VolumeSource: k8sv1.VolumeSource{
 				EmptyDir: &k8sv1.EmptyDirVolumeSource{
-					Medium: "memory",
+					Medium: "Memory",
 				},
 			},
 		},
